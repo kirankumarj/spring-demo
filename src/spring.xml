@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+ 
+ 	<bean id="itemCost" class="com.item.bs.ItemCost" init-method="myInit" destroy-method="destoryBean">
+ 		
+ 		<!--  property setter injection -->
+ 		<property name="itemCost" value="999.99"/>
+ 		<property name="itemDetails" ref="item-details"/>
+ 		
+ 		<!--  constructor injection -->
+ 		<constructor-arg type="int" value="123"/>
+ 		<constructor-arg type="java.lang.String" value="Pen"/>
+ 		
+ 		<!--  Inner bean-->
+ 		<property name="itemVendor">
+ 			<bean class="com.item.bs.ItemVendor">
+ 				<property name="vendorName" value="Kiran"/>
+ 				<property name="address" value="Anantapur"/>
+ 			</bean>
+ 		</property>
+ 		
+ 		<!-- List -->
+ 		<property name="shipmentType">
+ 			<list>
+ 				<value>"Ordinary"</value>
+ 				<value>"Express"</value>
+ 				<value>"Semi-express"</value>
+ 			</list>
+ 		</property>
+ 		
+ 	</bean>
+ 	
+ 	<!--  alias name-->
+ 	<alias name="itemCost" alias="item-cost"/>
+ 	
+ 	<bean id="itemDetails" class="com.item.bs.ItemDetails">
+ 		<constructor-arg index="0" value="true"/>
+ 		<constructor-arg index="1" value="Hyderabad"/>
+ 	</bean>
+ 	
+ 	<bean id="dup-item-details" class="com.item.bs.ItemDetails">
+ 		<constructor-arg index="0" value="true"/>
+ 		<constructor-arg index="1" value="Hyderabad"/>
+ 	</bean>
+ 	<alias name="itemDetails" alias="item-details"/>
+ 	
+</beans>        
