@@ -6,12 +6,12 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http:/
  	<bean id="itemCost" class="com.item.bs.ItemCost" init-method="myInit" destroy-method="destoryBean">
  		
  		<!--  property setter injection -->
- 		<property name="itemCost" value="999.99"/>
+ 		<property name="itemCost" value="${item-price}"/>
  		<property name="itemDetails" ref="item-details"/>
  		
  		<!--  constructor injection -->
  		<constructor-arg type="int" value="123"/>
- 		<constructor-arg type="java.lang.String" value="Pen"/>
+ 		<constructor-arg type="java.lang.String" value="${item-name}"/>
  		
  		<!--  Inner bean-->
  		<property name="itemVendor">
@@ -45,5 +45,16 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http:/
  		<constructor-arg index="1" value="Hyderabad"/>
  	</bean>
  	<alias name="itemDetails" alias="item-details"/>
+ 	
+ 	<!--  configure the bean post processor -->
+ 	<bean class="com.bean.BeanPostProcessorClass"/>
+ 	
+ 	<!--  configure the bean factory post processor -->
+ 	<bean class="com.bean.BeanFactoryPP" />
+ 	
+ 	<!--  Properties values -->
+ 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+ 		<property name="locations" value="spring-demo-constant.properties" /> 
+ 	</bean>
  	
 </beans>        
